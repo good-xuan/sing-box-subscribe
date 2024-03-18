@@ -66,16 +66,6 @@
       ],
     },
     {
-      "type": "urltest",
-      "tag": "auto_out",
-      "outbounds": [
-      "{all}"
-      ],
-      "url": "https://www.gstatic.com/generate_204",
-      "interval": "10m",
-      "interrupt_exist_connections": true
-    },
-    {
       "type": "direct",
       "tag": "direct_out"
     },
