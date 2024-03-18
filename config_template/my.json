@@ -64,7 +64,7 @@
       "outbounds": [
         "auto_out",
 		"direct_out",
-		"all"
+		"{all}"
       ],
       "filter":[
         {"action":"exclude","keywords":["网站|地址|剩余|过期|时间|有效"]}
@@ -74,7 +74,7 @@
       "type": "urltest",
       "tag": "auto_out",
       "outbounds": [
-        "all"
+        "{all}"
       ],
       "filter":[
         {"action":"exclude","keywords":["网站|地址|剩余|过期|时间|有效"]}
