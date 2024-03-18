@@ -62,32 +62,17 @@
       "type": "selector",
       "tag": "manual_out",
       "outbounds": [
-        "{all}"
+      "{all}"
       ],
-      "filter": [
-        {
-          "action": "exclude",
-          "keywords": [
-            " 官网|网站|剩余|流量|过期|时间|期|地址"
-          ]
-        }
-      ]
+      "default": "hy2",
+      "interrupt_exist_connections": true
     },
     {
       "type": "urltest",
       "tag": "auto_out",
       "outbounds": [
-        "{all}"
+      "{all}"
       ],
-      "filter": [
-        {
-          "action": "exclude",
-          "keywords": [
-            " 官网|网站|剩余|流量|过期|时间|期|地址"
-          ]
-        }
-      ]
-    },
       "url": "https://www.gstatic.com/generate_204",
       "interval": "10m",
       "interrupt_exist_connections": true
