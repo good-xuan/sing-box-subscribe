@@ -48,7 +48,7 @@
       "tag": "dns_in",
       "listen": "0.0.0.0",
       "listen_port": 53,
-	  "network": "udp"
+      "network": "udp"
     },
     {
       "type": "mixed",
@@ -80,7 +80,7 @@
         {"action":"exclude","keywords":["网站|地址|剩余|过期|时间|有效|频道|官网|探针|网址"]}
       ],
       "url": "https://www.gstatic.com/generate_204",
-      "interval": "10m",
+      "interval": "30m",
       "interrupt_exist_connections": true
     },
     {
