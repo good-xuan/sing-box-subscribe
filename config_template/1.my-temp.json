@@ -40,8 +40,15 @@
       "interface_name": "tun0",
       "inet4_address": "10.255.255.201/30",
       "auto_route": true,
-      "stack": "mixed",
-      "sniff": true
+      "stack": "system",
+      "sniff": true,
+      "platform": {
+        "http_proxy": {
+          "enabled": true,
+          "server": "127.0.0.1",
+          "server_port": 20171
+        }
+      }
     },
     {
       "type": "direct",
@@ -54,7 +61,8 @@
       "type": "mixed",
       "tag": "mixed_in",
       "listen": "0.0.0.0",
-      "listen_port": 20171
+      "listen_port": 20171,
+      "sniff": true
     }
   ],
   "outbounds": [
