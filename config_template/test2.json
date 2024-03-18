@@ -101,11 +101,6 @@
       {
         "protocol": "dns",
         "outbound": "dns-out"
-      },
-    
-      {
-        "rule_set": "geosite-cn",
-        "outbound": "China"
       }
     ],
    "rule_set": [
@@ -134,7 +129,5 @@
         "update_interval": "7d"
       }
     ],
-    "final": "proxy",
-    "auto_detect_interface": true
   },
 }
