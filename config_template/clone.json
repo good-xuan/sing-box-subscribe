@@ -16,39 +16,40 @@
     }
   }
 },
+{
   "dns": {
     "servers": [
       {
-        "tag": "proxy",
+        "tag": "dns_proxy",
         "address": "h3://1.1.1.1/dns-query",
-        "detour": "proxy"
+        "detour": "direct"
       },
       {
-        "tag": "direct",
+        "tag": "dns_local",
         "address": "quic://223.5.5.5",
-        "detour": "direct"
+        "detour": "proxy"
       }
     ],
     "rules": [
       {
         "outbound": "any",
-        "server": "direct"
+        "server": "dns_local"
       },
       {
         "clash_mode": "direct",
-        "server": "direct"
+        "server": "dns_local"
       },
       {
         "clash_mode": "global",
-        "server": "proxy"
+        "server": "dns_proxy"
       },
       {
         "rule_set": "geosite-geolocation-cn",
-        "server": "direct"
+        "server": "dns_local"
       }
     ],
     "strategy": "ipv4_only",
-    "final": "proxy"
+    "final": "dns_proxy"
   },
   "inbounds": [
     {
