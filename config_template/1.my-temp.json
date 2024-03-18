@@ -61,8 +61,7 @@
       "type": "mixed",
       "tag": "mixed_in",
       "listen": "0.0.0.0",
-      "listen_port": 20171,
-      "sniff": true
+      "listen_port": 20171
     }
   ],
   "outbounds": [
