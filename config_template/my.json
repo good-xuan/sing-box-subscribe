@@ -88,7 +88,6 @@
         }
       ]
     },
-      ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "10m",
       "interrupt_exist_connections": true
