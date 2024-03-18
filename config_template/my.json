@@ -64,8 +64,6 @@
       "outbounds": [
       "{all}"
       ],
-      "default": "hy2",
-      "interrupt_exist_connections": true
     },
     {
       "type": "urltest",
