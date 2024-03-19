@@ -10,9 +10,17 @@
         "tag": "dns_local",
         "address": "quic://223.5.5.5",
         "detour": "direct_out"
+      },
+      {
+        "tag": "dns_block",
+        "address": "rcode://success"
       }
     ],
     "rules": [
+	  {
+        "rule_set": "geosite-category-ads-all",
+        "server": "dns_block"
+      },
       {
         "outbound": "any",
         "server": "dns_local"
