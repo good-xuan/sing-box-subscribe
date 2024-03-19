@@ -41,6 +41,7 @@
       "inet4_address": "10.255.255.201/30",
       "auto_route": true,
       "stack": "system",
+      "endpoint_independent_nat": false,
       "sniff": true,
       "platform": {
         "http_proxy": {
@@ -61,7 +62,8 @@
       "type": "mixed",
       "tag": "mixed_in",
       "listen": "0.0.0.0",
-      "listen_port": 20171
+      "listen_port": 20171,
+      "sniff": true
     }
   ],
   "outbounds": [
@@ -74,7 +76,7 @@
 	"{all}"
       ],
       "filter":[
-        {"action":"exclude","keywords":["网站|地址|剩余|过期|时间|有效|频道|官网|探针|网址"]}
+        {"action":"exclude","keywords":["网站|地址|剩余|过期|时间|有效|频道|官网|探针|网址|本站|到期"]}
       ]
     },
     {
@@ -84,7 +86,7 @@
         "{all}"
       ],
       "filter":[
-        {"action":"exclude","keywords":["网站|地址|剩余|过期|时间|有效|频道|官网|探针|网址"]}
+        {"action":"exclude","keywords":["网站|地址|剩余|过期|时间|有效|频道|官网|探针|网址|本站|到期"]}
       ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "30m",
