@@ -1,0 +1,173 @@
+{
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns_proxy",
+        "address": "h3://1.1.1.1/dns-query",
+        "detour": "manual_out"
+      },
+      {
+        "tag": "dns_local",
+        "address": "quic://223.5.5.5",
+        "detour": "direct_out"
+      },
+      {
+        "tag": "dns_block",
+        "address": "rcode://success"
+      }
+    ],
+    "rules": [
+      {
+        "rule_set": "geosite-category-ads-all",
+        "server": "dns_block"
+      },
+      {
+        "outbound": "any",
+        "server": "dns_local"
+      },
+      {
+        "clash_mode": "direct",
+        "server": "dns_local"
+      },
+      {
+        "clash_mode": "global",
+        "server": "dns_proxy"
+      },
+      {
+        "rule_set": "geosite-geolocation-cn",
+        "server": "dns_local"
+      }
+    ],
+    "strategy": "ipv4_only",
+    "final": "dns_proxy"
+  },
+ "inbounds": [
+    {
+      "type": "mixed",
+      "tag": "mixed_in",
+      "listen": "0.0.0.0",
+      "listen_port": 20171,
+      "sniff": true
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "manual_out",
+      "outbounds": [
+        "auto_out",
+	"direct_out",
+	"{all}"
+      ],
+      "filter":[
+        {"action":"exclude","keywords":["网站|地址|剩余|过期|时间|有效|频道|官网|探针|网址|本站|到期"]}
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "auto_out",
+      "outbounds": [
+        "{all}"
+      ],
+      "filter":[
+        {"action":"exclude","keywords":["网站|地址|剩余|过期|时间|有效|频道|官网|探针|网址|本站|到期"]}
+      ],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "30m",
+      "interrupt_exist_connections": true
+    },
+    {
+      "type": "direct",
+      "tag": "direct_out"
+    },
+    {
+      "type": "block",
+      "tag": "block_out"
+    },
+    {
+      "type": "dns",
+      "tag": "dns_out"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns_out"
+      },
+      {
+        "ip_is_private": true,
+        "outbound": "direct_out"
+      },
+      {
+        "clash_mode": "direct",
+        "outbound": "direct_out"
+      },
+      {
+        "clash_mode": "global",
+        "outbound": "manual_out"
+      },
+      {
+        "rule_set": [
+          "geosite-category-ads-all"
+        ],
+        "outbound": "block_out"
+      },
+      {
+        "rule_set": [
+          "geoip-cn",
+          "geosite-geolocation-cn"
+        ],
+        "outbound": "direct_out"
+      },
+      {
+        "inbound": "dns_in",
+        "outbound": "dns_out"
+      },
+	  {
+        "inbound": "mixed_in",
+        "outbound": "manual_out"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geoip-cn",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+        "download_detour": "manual_out",
+        "update_interval": "7d"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-geolocation-cn",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-cn.srs",
+        "download_detour": "manual_out",
+        "update_interval": "7d"
+      },
+      {
+        "type": "remote",
+        "tag": "geosite-category-ads-all",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
+        "download_detour": "manual_out",
+        "update_interval": "7d"
+      }
+    ],
+    "final": "manual_out",
+    "auto_detect_interface": true
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true
+    },
+    "clash_api": {
+      "external_controller": "0.0.0.0:9090",
+      "external_ui": "ui",
+      "external_ui_download_url": "https://github.com/MetaCubeX/Yacd-meta/archive/gh-pages.zip",
+      "external_ui_download_detour": "manual_out",
+      "default_mode": "rule"
+    }
+  }
+}
