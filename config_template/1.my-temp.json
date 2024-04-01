@@ -60,13 +60,6 @@
       }
     },
     {
-      "type": "direct",
-      "tag": "dns_in",
-      "listen": "0.0.0.0",
-      "listen_port": 53,
-      "network": "udp"
-    },
-    {
       "type": "mixed",
       "tag": "mixed_in",
       "listen": "0.0.0.0",
