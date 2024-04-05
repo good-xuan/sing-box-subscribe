@@ -51,6 +51,7 @@
       "stack": "system",
       "endpoint_independent_nat": false,
       "sniff": true,
+      "sniff_override_destination": true,
       "platform": {
         "http_proxy": {
           "enabled": true,
