@@ -76,7 +76,7 @@
       "interrupt_exist_connections": true,
       "outbounds": [
         "auto_out",
-        "direct_out",
+        "direct",
         "{all}"
       ],
       "filter": [
