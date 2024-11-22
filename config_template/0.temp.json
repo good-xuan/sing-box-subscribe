@@ -25,7 +25,7 @@
         "clash_mode": "Global"
       },
       {
-        "server": "local_local",
+        "server": "local",
         "clash_mode": "Direct"
       },
       {
