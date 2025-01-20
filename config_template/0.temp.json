@@ -106,7 +106,7 @@
     "auto_detect_interface": true,
     "rules": [
       {
-        "outbound": "block",
+        "action": "reject",
         "network": [
           "udp"
         ],
@@ -128,6 +128,14 @@
       {
         "outbound": "direct",
         "clash_mode": "Direct"
+      },
+      {
+        "ip_cidr": [
+          "10.0.0.0/8",
+          "172.16.0.0/16",
+          "192.168.0.0/16"
+        ],
+        "outbound": "direct"
       },
       {
         "rule_set": [
