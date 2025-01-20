@@ -62,7 +62,7 @@
   "outbounds": [
     {
       "type": "selector",
-      "tag": "manual_out",
+      "tag": "proxy",
       "interrupt_exist_connections": true,
       "outbounds": [
         "auto_out",
