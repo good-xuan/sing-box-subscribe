@@ -30,13 +30,6 @@
       },
       {
         "rule_set": [
-          "geoip-cn"
-        ],
-        "action": "route",
-        "server": "local"
-      },
-      {
-        "rule_set": [
           "geosite-cn"
         ],
         "action": "route",
@@ -140,16 +133,8 @@
           "172.16.0.0/12",
           "192.168.0.0/16"
         ],
-        "outbound": "direct"
-      },
-      {
         "rule_set": [
-          "geoip-cn"
-        ],
-        "outbound": "direct"
-      },
-      {
-        "rule_set": [
+          "geoip-cn",
           "geosite-cn"
         ],
         "outbound": "direct"
