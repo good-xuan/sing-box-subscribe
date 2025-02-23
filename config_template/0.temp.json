@@ -30,7 +30,13 @@
       },
       {
         "rule_set": [
-          "geoip-cn",
+          "geoip-cn"
+        ],
+        "action": "route",
+        "server": "local"
+      },
+      {
+        "rule_set": [
           "geosite-cn",
           "geosite-geolocation-cn"
         ],
