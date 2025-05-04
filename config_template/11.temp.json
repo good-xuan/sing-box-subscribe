@@ -1,0 +1,159 @@
+
+{
+  "log":
+  {
+    "level": "warn",
+    "timestamp": true
+  },
+  "dns":
+  {
+    "servers": [
+      {
+        "tag": "remote",
+        "address": "https://1.1.1.1/dns-query",
+        "detour": "proxy"
+      },
+      {
+        "tag": "local",
+        "address": "223.5.5.5",
+        "detour": "direct"
+      }
+    ],
+    "rules": [
+      {
+        "server": "remote",
+        "clash_mode": "Global"
+      },
+      {
+        "server": "local",
+        "clash_mode": "Direct"
+      },
+      {
+        "rule_set": [
+          "geosite-cn"
+        ],
+        "action": "route",
+        "server": "local"
+      }
+    ],
+    "strategy": "ipv4_only"
+  },
+  "inbounds": [
+    {
+      "type": "mixed",
+      "listen": "0.0.0.0",
+      "listen_port": 20668
+    },
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "interface_name": "singbox_tun",
+      "address": [
+        "172.16.255.1/30"
+      ],
+      "mtu": 9000,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "gvisor"
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "selector",
+      "tag": "proxy",
+      "interrupt_exist_connections": true,
+      "outbounds": [
+        "auto_out",
+        "direct",
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "exclude",
+          "keywords": [
+            "网站|地址|剩余|过期|时间|有效|频道|官网|探针|网址|本站|到期|APPCF"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "urltest",
+      "tag": "auto_out",
+      "interrupt_exist_connections": true,
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "30m",
+      "outbounds": [
+        "{all}"
+      ],
+      "filter": [
+        {
+          "action": "exclude",
+          "keywords": [
+            "网站|地址|剩余|过期|时间|有效|频道|官网|探针|网址|本站|到期|APPCF"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    }
+  ],
+  "route":
+  {
+    "auto_detect_interface": true,
+    "rules": [
+      {
+        "action": "reject",
+        "network": [
+          "udp"
+        ],
+        "port": [
+          443
+        ]
+      },
+      {
+        "action": "sniff"
+      },
+      {
+        "protocol": "dns",
+        "action": "hijack-dns"
+      },
+      {
+        "outbound": "proxy",
+        "clash_mode": "Global"
+      },
+      {
+        "outbound": "direct",
+        "clash_mode": "Direct"
+      },
+      {
+        "ip_cidr": [
+          "10.0.0.0/8",
+          "172.16.0.0/12",
+          "192.168.0.0/16"
+        ],
+        "rule_set": [
+          "geosite-cn"
+        ],
+        "outbound": "direct"
+      }
+    ],
+    "rule_set": [
+      {
+        "type": "remote",
+        "tag": "geosite-cn",
+        "format": "binary",
+        "url": "https://github.com/2dust/sing-box-rules/raw/refs/heads/rule-set-geosite/geosite-cn.srs"
+      }
+    ]
+  },
+  "experimental":
+  {
+    "clash_api":
+    {
+      "external_controller": "0.0.0.0:9090",
+      "external_ui": "/opt/sing-box/ui"
+    }
+  }
+}
