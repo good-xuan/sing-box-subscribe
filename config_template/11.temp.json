@@ -82,7 +82,8 @@
         "type": "remote",
         "tag": "geosite-cn",
         "format": "binary",
-        "url": "https://ghfast.top/https://github.com/SagerNet/sing-geosite/raw/refs/heads/rule-set/geosite-cn.srs"
+        "url": "https://ghfast.top/https://github.com/SagerNet/sing-geosite/raw/refs/heads/rule-set/geosite-cn.srs",
+        "download_detour": "direct"
       }
     ]
   },
