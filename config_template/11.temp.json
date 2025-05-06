@@ -3,6 +3,39 @@
     "level": "warn",
     "timestamp": true
   },
+  "dns":
+  {
+    "servers": [
+      {
+        "tag": "remote",
+        "address": "https://1.1.1.1/dns-query",
+        "detour": "proxy"
+      },
+      {
+        "tag": "local",
+        "address": "223.5.5.5",
+        "detour": "direct"
+      }
+    ],
+    "rules": [
+      {
+        "server": "remote",
+        "clash_mode": "Global"
+      },
+      {
+        "server": "local",
+        "clash_mode": "Direct"
+      },
+      {
+        "rule_set": [
+          "geosite-cn"
+        ],
+        "action": "route",
+        "server": "local"
+      }
+    ],
+    "strategy": "ipv4_only"
+  },
   "inbounds": [{
       "type": "mixed",
       "listen": "0.0.0.0",
